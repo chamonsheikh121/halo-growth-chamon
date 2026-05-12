@@ -9,38 +9,233 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TeamRouteImport } from './routes/team'
+import { Route as StoriesRouteImport } from './routes/stories'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as InsightsRouteImport } from './routes/insights'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ApproachRouteImport } from './routes/approach'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesOrganizationalStrategyRouteImport } from './routes/services.organizational-strategy'
+import { Route as ServicesLeadershipAssessmentRouteImport } from './routes/services.leadership-assessment'
+import { Route as ServicesLeadershipAdvisoryRouteImport } from './routes/services.leadership-advisory'
+import { Route as ServicesExecutiveSearchRouteImport } from './routes/services.executive-search'
 
+const TeamRoute = TeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoriesRoute = StoriesRouteImport.update({
+  id: '/stories',
+  path: '/stories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InsightsRoute = InsightsRouteImport.update({
+  id: '/insights',
+  path: '/insights',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApproachRoute = ApproachRouteImport.update({
+  id: '/approach',
+  path: '/approach',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesOrganizationalStrategyRoute =
+  ServicesOrganizationalStrategyRouteImport.update({
+    id: '/organizational-strategy',
+    path: '/organizational-strategy',
+    getParentRoute: () => ServicesRoute,
+  } as any)
+const ServicesLeadershipAssessmentRoute =
+  ServicesLeadershipAssessmentRouteImport.update({
+    id: '/leadership-assessment',
+    path: '/leadership-assessment',
+    getParentRoute: () => ServicesRoute,
+  } as any)
+const ServicesLeadershipAdvisoryRoute =
+  ServicesLeadershipAdvisoryRouteImport.update({
+    id: '/leadership-advisory',
+    path: '/leadership-advisory',
+    getParentRoute: () => ServicesRoute,
+  } as any)
+const ServicesExecutiveSearchRoute = ServicesExecutiveSearchRouteImport.update({
+  id: '/executive-search',
+  path: '/executive-search',
+  getParentRoute: () => ServicesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/approach': typeof ApproachRoute
+  '/contact': typeof ContactRoute
+  '/insights': typeof InsightsRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/stories': typeof StoriesRoute
+  '/team': typeof TeamRoute
+  '/services/executive-search': typeof ServicesExecutiveSearchRoute
+  '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
+  '/services/leadership-assessment': typeof ServicesLeadershipAssessmentRoute
+  '/services/organizational-strategy': typeof ServicesOrganizationalStrategyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/approach': typeof ApproachRoute
+  '/contact': typeof ContactRoute
+  '/insights': typeof InsightsRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/stories': typeof StoriesRoute
+  '/team': typeof TeamRoute
+  '/services/executive-search': typeof ServicesExecutiveSearchRoute
+  '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
+  '/services/leadership-assessment': typeof ServicesLeadershipAssessmentRoute
+  '/services/organizational-strategy': typeof ServicesOrganizationalStrategyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/approach': typeof ApproachRoute
+  '/contact': typeof ContactRoute
+  '/insights': typeof InsightsRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/stories': typeof StoriesRoute
+  '/team': typeof TeamRoute
+  '/services/executive-search': typeof ServicesExecutiveSearchRoute
+  '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
+  '/services/leadership-assessment': typeof ServicesLeadershipAssessmentRoute
+  '/services/organizational-strategy': typeof ServicesOrganizationalStrategyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/approach'
+    | '/contact'
+    | '/insights'
+    | '/services'
+    | '/stories'
+    | '/team'
+    | '/services/executive-search'
+    | '/services/leadership-advisory'
+    | '/services/leadership-assessment'
+    | '/services/organizational-strategy'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/approach'
+    | '/contact'
+    | '/insights'
+    | '/services'
+    | '/stories'
+    | '/team'
+    | '/services/executive-search'
+    | '/services/leadership-advisory'
+    | '/services/leadership-assessment'
+    | '/services/organizational-strategy'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/approach'
+    | '/contact'
+    | '/insights'
+    | '/services'
+    | '/stories'
+    | '/team'
+    | '/services/executive-search'
+    | '/services/leadership-advisory'
+    | '/services/leadership-assessment'
+    | '/services/organizational-strategy'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ApproachRoute: typeof ApproachRoute
+  ContactRoute: typeof ContactRoute
+  InsightsRoute: typeof InsightsRoute
+  ServicesRoute: typeof ServicesRouteWithChildren
+  StoriesRoute: typeof StoriesRoute
+  TeamRoute: typeof TeamRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/team': {
+      id: '/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stories': {
+      id: '/stories'
+      path: '/stories'
+      fullPath: '/stories'
+      preLoaderRoute: typeof StoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insights': {
+      id: '/insights'
+      path: '/insights'
+      fullPath: '/insights'
+      preLoaderRoute: typeof InsightsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/approach': {
+      id: '/approach'
+      path: '/approach'
+      fullPath: '/approach'
+      preLoaderRoute: typeof ApproachRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +243,65 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/organizational-strategy': {
+      id: '/services/organizational-strategy'
+      path: '/organizational-strategy'
+      fullPath: '/services/organizational-strategy'
+      preLoaderRoute: typeof ServicesOrganizationalStrategyRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/leadership-assessment': {
+      id: '/services/leadership-assessment'
+      path: '/leadership-assessment'
+      fullPath: '/services/leadership-assessment'
+      preLoaderRoute: typeof ServicesLeadershipAssessmentRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/leadership-advisory': {
+      id: '/services/leadership-advisory'
+      path: '/leadership-advisory'
+      fullPath: '/services/leadership-advisory'
+      preLoaderRoute: typeof ServicesLeadershipAdvisoryRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/executive-search': {
+      id: '/services/executive-search'
+      path: '/executive-search'
+      fullPath: '/services/executive-search'
+      preLoaderRoute: typeof ServicesExecutiveSearchRouteImport
+      parentRoute: typeof ServicesRoute
+    }
   }
 }
 
+interface ServicesRouteChildren {
+  ServicesExecutiveSearchRoute: typeof ServicesExecutiveSearchRoute
+  ServicesLeadershipAdvisoryRoute: typeof ServicesLeadershipAdvisoryRoute
+  ServicesLeadershipAssessmentRoute: typeof ServicesLeadershipAssessmentRoute
+  ServicesOrganizationalStrategyRoute: typeof ServicesOrganizationalStrategyRoute
+}
+
+const ServicesRouteChildren: ServicesRouteChildren = {
+  ServicesExecutiveSearchRoute: ServicesExecutiveSearchRoute,
+  ServicesLeadershipAdvisoryRoute: ServicesLeadershipAdvisoryRoute,
+  ServicesLeadershipAssessmentRoute: ServicesLeadershipAssessmentRoute,
+  ServicesOrganizationalStrategyRoute: ServicesOrganizationalStrategyRoute,
+}
+
+const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
+  ServicesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ApproachRoute: ApproachRoute,
+  ContactRoute: ContactRoute,
+  InsightsRoute: InsightsRoute,
+  ServicesRoute: ServicesRouteWithChildren,
+  StoriesRoute: StoriesRoute,
+  TeamRoute: TeamRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
