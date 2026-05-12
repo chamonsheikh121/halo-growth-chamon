@@ -30,5 +30,9 @@ export function Reveal({ children, delay = 0, className = "", as: Tag = "div" }:
   }, [delay]);
 
   // @ts-expect-error dynamic tag
-  return <Tag ref={ref} className={`reveal ${className}`}>{children}</Tag>;
+  return (
+    <Tag ref={ref} className={`reveal ${className}`}>
+      {children}
+    </Tag>
+  );
 }

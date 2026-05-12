@@ -21,6 +21,7 @@ import { Route as ServicesOrganizationalStrategyRouteImport } from './routes/ser
 import { Route as ServicesLeadershipAssessmentRouteImport } from './routes/services.leadership-assessment'
 import { Route as ServicesLeadershipAdvisoryRouteImport } from './routes/services.leadership-advisory'
 import { Route as ServicesExecutiveSearchRouteImport } from './routes/services.executive-search'
+import { Route as InsightsSlugRouteImport } from './routes/insights.$slug'
 
 const TeamRoute = TeamRouteImport.update({
   id: '/team',
@@ -85,16 +86,22 @@ const ServicesExecutiveSearchRoute = ServicesExecutiveSearchRouteImport.update({
   path: '/executive-search',
   getParentRoute: () => ServicesRoute,
 } as any)
+const InsightsSlugRoute = InsightsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => InsightsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/approach': typeof ApproachRoute
   '/contact': typeof ContactRoute
-  '/insights': typeof InsightsRoute
+  '/insights': typeof InsightsRouteWithChildren
   '/services': typeof ServicesRouteWithChildren
   '/stories': typeof StoriesRoute
   '/team': typeof TeamRoute
+  '/insights/$slug': typeof InsightsSlugRoute
   '/services/executive-search': typeof ServicesExecutiveSearchRoute
   '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
   '/services/leadership-assessment': typeof ServicesLeadershipAssessmentRoute
@@ -105,10 +112,11 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/approach': typeof ApproachRoute
   '/contact': typeof ContactRoute
-  '/insights': typeof InsightsRoute
+  '/insights': typeof InsightsRouteWithChildren
   '/services': typeof ServicesRouteWithChildren
   '/stories': typeof StoriesRoute
   '/team': typeof TeamRoute
+  '/insights/$slug': typeof InsightsSlugRoute
   '/services/executive-search': typeof ServicesExecutiveSearchRoute
   '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
   '/services/leadership-assessment': typeof ServicesLeadershipAssessmentRoute
@@ -120,10 +128,11 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/approach': typeof ApproachRoute
   '/contact': typeof ContactRoute
-  '/insights': typeof InsightsRoute
+  '/insights': typeof InsightsRouteWithChildren
   '/services': typeof ServicesRouteWithChildren
   '/stories': typeof StoriesRoute
   '/team': typeof TeamRoute
+  '/insights/$slug': typeof InsightsSlugRoute
   '/services/executive-search': typeof ServicesExecutiveSearchRoute
   '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
   '/services/leadership-assessment': typeof ServicesLeadershipAssessmentRoute
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/stories'
     | '/team'
+    | '/insights/$slug'
     | '/services/executive-search'
     | '/services/leadership-advisory'
     | '/services/leadership-assessment'
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/stories'
     | '/team'
+    | '/insights/$slug'
     | '/services/executive-search'
     | '/services/leadership-advisory'
     | '/services/leadership-assessment'
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/stories'
     | '/team'
+    | '/insights/$slug'
     | '/services/executive-search'
     | '/services/leadership-advisory'
     | '/services/leadership-assessment'
@@ -179,7 +191,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ApproachRoute: typeof ApproachRoute
   ContactRoute: typeof ContactRoute
-  InsightsRoute: typeof InsightsRoute
+  InsightsRoute: typeof InsightsRouteWithChildren
   ServicesRoute: typeof ServicesRouteWithChildren
   StoriesRoute: typeof StoriesRoute
   TeamRoute: typeof TeamRoute
@@ -271,8 +283,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesExecutiveSearchRouteImport
       parentRoute: typeof ServicesRoute
     }
+    '/insights/$slug': {
+      id: '/insights/$slug'
+      path: '/$slug'
+      fullPath: '/insights/$slug'
+      preLoaderRoute: typeof InsightsSlugRouteImport
+      parentRoute: typeof InsightsRoute
+    }
   }
 }
+
+interface InsightsRouteChildren {
+  InsightsSlugRoute: typeof InsightsSlugRoute
+}
+
+const InsightsRouteChildren: InsightsRouteChildren = {
+  InsightsSlugRoute: InsightsSlugRoute,
+}
+
+const InsightsRouteWithChildren = InsightsRoute._addFileChildren(
+  InsightsRouteChildren,
+)
 
 interface ServicesRouteChildren {
   ServicesExecutiveSearchRoute: typeof ServicesExecutiveSearchRoute
@@ -297,7 +328,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ApproachRoute: ApproachRoute,
   ContactRoute: ContactRoute,
-  InsightsRoute: InsightsRoute,
+  InsightsRoute: InsightsRouteWithChildren,
   ServicesRoute: ServicesRouteWithChildren,
   StoriesRoute: StoriesRoute,
   TeamRoute: TeamRoute,

@@ -9,9 +9,15 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — HALO Growth Partners" },
-      { name: "description", content: "Begin a confidential conversation with a HALO senior partner." },
+      {
+        name: "description",
+        content: "Begin a confidential conversation with a HALO senior partner.",
+      },
       { property: "og:title", content: "Contact HALO Growth Partners" },
-      { property: "og:description", content: "Confidential consultations with our senior partners." },
+      {
+        property: "og:description",
+        content: "Confidential consultations with our senior partners.",
+      },
     ],
   }),
   component: Contact,
@@ -46,7 +52,9 @@ function Contact() {
                         <c.icon className="h-4 w-4" />
                       </span>
                       <div>
-                        <div className="text-[10px] uppercase tracking-[0.28em] text-muted-foreground">{c.l}</div>
+                        <div className="text-[10px] uppercase tracking-[0.28em] text-muted-foreground">
+                          {c.l}
+                        </div>
                         <div className="mt-1 text-[15px] text-white">{c.v}</div>
                       </div>
                     </div>
@@ -56,9 +64,12 @@ function Contact() {
             </Reveal>
             <Reveal delay={150}>
               <div className="card-elite p-8">
-                <div className="text-[10px] uppercase tracking-[0.28em] text-electric">For Boards & Investors</div>
+                <div className="text-[10px] uppercase tracking-[0.28em] text-electric">
+                  For Boards & Investors
+                </div>
                 <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-                  We work with boards, sponsors, and CEOs on the most consequential leadership decisions of their tenure. All conversations are confidential.
+                  We work with boards, sponsors, and CEOs on the most consequential leadership
+                  decisions of their tenure. All conversations are confidential.
                 </p>
               </div>
             </Reveal>
@@ -70,7 +81,9 @@ function Contact() {
                 onSubmit={(e) => {
                   e.preventDefault();
                   setSent(true);
-                  toast.success("Thank you. A senior partner will be in touch within one business day.");
+                  toast.success(
+                    "Thank you. A senior partner will be in touch within one business day.",
+                  );
                 }}
                 className="glass relative rounded-2xl p-8 md:p-10"
               >
@@ -80,10 +93,16 @@ function Contact() {
                   <Field label="Company" name="company" />
                   <Field label="Email" name="email" type="email" required />
                   <Field label="Phone" name="phone" />
-                  <Field label="Engagement Interest" name="interest" placeholder="e.g. Executive Search, Leadership Advisory…" />
+                  <Field
+                    label="Engagement Interest"
+                    name="interest"
+                    placeholder="e.g. Executive Search, Leadership Advisory…"
+                  />
                 </div>
                 <div className="mt-5">
-                  <label className="text-[10px] uppercase tracking-[0.28em] text-muted-foreground">How can we help?</label>
+                  <label className="text-[10px] uppercase tracking-[0.28em] text-muted-foreground">
+                    How can we help?
+                  </label>
                   <textarea
                     name="message"
                     rows={5}
@@ -93,7 +112,13 @@ function Contact() {
                   />
                 </div>
                 <button type="submit" className="btn-electric mt-8" disabled={sent}>
-                  {sent ? "Received — we'll be in touch" : <>Begin the Conversation <ArrowUpRight className="h-4 w-4" /></>}
+                  {sent ? (
+                    "Received — we'll be in touch"
+                  ) : (
+                    <>
+                      Begin the Conversation <ArrowUpRight className="h-4 w-4" />
+                    </>
+                  )}
                 </button>
                 <p className="mt-5 text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
                   All inquiries are treated in strict confidence.
@@ -107,10 +132,24 @@ function Contact() {
   );
 }
 
-function Field({ label, name, type = "text", required, placeholder }: { label: string; name: string; type?: string; required?: boolean; placeholder?: string }) {
+function Field({
+  label,
+  name,
+  type = "text",
+  required,
+  placeholder,
+}: {
+  label: string;
+  name: string;
+  type?: string;
+  required?: boolean;
+  placeholder?: string;
+}) {
   return (
     <div>
-      <label className="text-[10px] uppercase tracking-[0.28em] text-muted-foreground">{label}</label>
+      <label className="text-[10px] uppercase tracking-[0.28em] text-muted-foreground">
+        {label}
+      </label>
       <input
         type={type}
         name={name}

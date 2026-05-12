@@ -5,9 +5,16 @@ export const Route = createFileRoute("/services/leadership-advisory")({
   head: () => ({
     meta: [
       { title: "Leadership Advisory — HALO Growth Partners" },
-      { name: "description", content: "Senior counsel for CEOs, executive teams, and boards navigating consequential moments." },
+      {
+        name: "description",
+        content:
+          "Senior counsel for CEOs, executive teams, and boards navigating consequential moments.",
+      },
       { property: "og:title", content: "Leadership Advisory" },
-      { property: "og:description", content: "Trusted advisory for the leaders who can no longer afford to be wrong." },
+      {
+        property: "og:description",
+        content: "Trusted advisory for the leaders who can no longer afford to be wrong.",
+      },
     ],
   }),
   component: () => (
@@ -22,12 +29,30 @@ export const Route = createFileRoute("/services/leadership-advisory")({
         "Founder-led businesses moving to an institutional operating model.",
       ]}
       whatWeDeliver={[
-        { t: "Executive Team Alignment", d: "Diagnose, recalibrate, and reset the operating cadence of the senior team around the strategy ahead." },
-        { t: "CEO Counsel", d: "A confidential thinking partner for the moments that don't make it into the board deck." },
-        { t: "Board Effectiveness", d: "Composition, governance rhythm, and the operating relationship between board and management." },
-        { t: "Succession Architecture", d: "Readiness systems for the C-suite — designed long before the seat is empty." },
-        { t: "Inflection-Point Counsel", d: "Senior advisory through transitions, integrations, and strategy resets." },
-        { t: "Quarterly Leadership Review", d: "An ongoing, calibrated point of view on team performance and bench strength." },
+        {
+          t: "Executive Team Alignment",
+          d: "Diagnose, recalibrate, and reset the operating cadence of the senior team around the strategy ahead.",
+        },
+        {
+          t: "CEO Counsel",
+          d: "A confidential thinking partner for the moments that don't make it into the board deck.",
+        },
+        {
+          t: "Board Effectiveness",
+          d: "Composition, governance rhythm, and the operating relationship between board and management.",
+        },
+        {
+          t: "Succession Architecture",
+          d: "Readiness systems for the C-suite — designed long before the seat is empty.",
+        },
+        {
+          t: "Inflection-Point Counsel",
+          d: "Senior advisory through transitions, integrations, and strategy resets.",
+        },
+        {
+          t: "Quarterly Leadership Review",
+          d: "An ongoing, calibrated point of view on team performance and bench strength.",
+        },
       ]}
       outcomes={[
         "An executive team aligned on the few moves that matter — and accountable to them.",

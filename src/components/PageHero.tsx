@@ -39,7 +39,11 @@ export function CTABand({
   eyebrow = "Begin a Conversation",
   title = "Let's discuss the inflection point ahead.",
   body = "Confidential consultations with our senior partners. We respond within one business day.",
-}: { eyebrow?: string; title?: string; body?: string }) {
+}: {
+  eyebrow?: string;
+  title?: string;
+  body?: string;
+}) {
   return (
     <section className="relative overflow-hidden border-y border-white/5 py-24">
       <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
@@ -50,13 +54,17 @@ export function CTABand({
           <h2 className="font-display mt-5 text-4xl font-light leading-[1.05] tracking-tight text-gradient md:text-6xl">
             {title}
           </h2>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">{body}</p>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+            {body}
+          </p>
         </div>
         <div className="md:col-span-4 flex flex-wrap gap-3 md:justify-end">
           <Link to="/contact" className="btn-electric">
             Schedule a Conversation <ArrowUpRight className="h-4 w-4" />
           </Link>
-          <Link to="/approach" className="btn-ghost">Explore Our Approach</Link>
+          <Link to="/approach" className="btn-ghost">
+            Explore Our Approach
+          </Link>
         </div>
       </div>
     </section>

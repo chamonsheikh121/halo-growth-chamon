@@ -43,10 +43,13 @@ export function Footer() {
           <div className="md:col-span-5">
             <Logo />
             <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-muted-foreground">
-              Integrated growth, grounded in strategy, driven by leadership. HALO partners with executive teams navigating
-              transformation and inflection points.
+              Integrated growth, grounded in strategy, driven by leadership. HALO partners with
+              executive teams navigating transformation and inflection points.
             </p>
-            <Link to="/contact" className="mt-8 inline-flex items-center gap-2 text-[13px] font-medium text-white">
+            <Link
+              to="/contact"
+              className="mt-8 inline-flex items-center gap-2 text-[13px] font-medium text-white"
+            >
               <span className="link-underline">Begin a confidential conversation</span>
               <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
@@ -68,10 +71,18 @@ export function Footer() {
           ))}
 
           <div className="md:col-span-1 flex md:flex-col gap-3">
-            <a aria-label="LinkedIn" href="#" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/70 hover:border-white/30 hover:text-white">
+            <a
+              aria-label="LinkedIn"
+              href="#"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/70 hover:border-white/30 hover:text-white"
+            >
               <Linkedin className="h-4 w-4" />
             </a>
-            <a aria-label="Email" href="mailto:hello@halogrowth.com" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/70 hover:border-white/30 hover:text-white">
+            <a
+              aria-label="Email"
+              href="mailto:hello@halogrowth.com"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/70 hover:border-white/30 hover:text-white"
+            >
               <Mail className="h-4 w-4" />
             </a>
           </div>
@@ -80,10 +91,16 @@ export function Footer() {
         <div className="hairline" />
 
         <div className="flex flex-col items-start justify-between gap-3 py-8 md:flex-row md:items-center">
-          <div className="text-[12px] text-white/50">© {new Date().getFullYear()} HALO Growth Partners. All rights reserved.</div>
+          <div className="text-[12px] text-white/50">
+            © {new Date().getFullYear()} HALO Growth Partners. All rights reserved.
+          </div>
           <div className="flex items-center gap-6 text-[12px] text-white/50">
-            <a href="#" className="hover:text-white">Privacy</a>
-            <a href="#" className="hover:text-white">Terms</a>
+            <a href="#" className="hover:text-white">
+              Privacy
+            </a>
+            <a href="#" className="hover:text-white">
+              Terms
+            </a>
             <span className="hidden sm:inline">Chicago · New York · London</span>
           </div>
         </div>

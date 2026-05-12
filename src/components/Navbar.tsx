@@ -4,10 +4,26 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { Logo } from "./Logo";
 
 const services = [
-  { to: "/services/leadership-advisory", label: "Leadership Advisory", desc: "Coaching for executives at inflection points." },
-  { to: "/services/executive-search", label: "Executive Search", desc: "Senior leadership identification & placement." },
-  { to: "/services/organizational-strategy", label: "Organizational Strategy", desc: "Aligning strategy, structure & talent." },
-  { to: "/services/leadership-assessment", label: "Leadership Assessment", desc: "Predictive insight into executive performance." },
+  {
+    to: "/services/leadership-advisory",
+    label: "Leadership Advisory",
+    desc: "Coaching for executives at inflection points.",
+  },
+  {
+    to: "/services/executive-search",
+    label: "Executive Search",
+    desc: "Senior leadership identification & placement.",
+  },
+  {
+    to: "/services/organizational-strategy",
+    label: "Organizational Strategy",
+    desc: "Aligning strategy, structure & talent.",
+  },
+  {
+    to: "/services/leadership-assessment",
+    label: "Leadership Assessment",
+    desc: "Predictive insight into executive performance.",
+  },
 ];
 
 const nav = [
@@ -33,7 +49,10 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => { setMobile(false); setOpen(false); }, [path]);
+  useEffect(() => {
+    setMobile(false);
+    setOpen(false);
+  }, [path]);
 
   return (
     <header
@@ -55,14 +74,23 @@ export function Navbar() {
               >
                 <Link
                   to={item.to}
-                  className="link-underline inline-flex items-center gap-1 text-[13px] font-medium tracking-wide text-white/80 hover:text-white"
+                  className="link-underline relative inline-flex items-center gap-1 text-[13px] font-medium tracking-wide text-white/80 hover:text-white transition-colors"
                 >
                   {item.label}
                   <ChevronDown className="h-3.5 w-3.5 opacity-60" />
+                  {(path === item.to || path.startsWith("/services")) &&
+                    item.to === "/services" && (
+                      <span
+                        className="inline-block h-1.5 w-1.5 rounded-full bg-electric -ml-0.5"
+                        aria-hidden
+                      />
+                    )}
                 </Link>
                 <div
                   className={`absolute left-1/2 top-full w-[640px] -translate-x-1/2 pt-5 transition-all duration-300 ${
-                    open ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-2"
+                    open
+                      ? "pointer-events-auto opacity-100 translate-y-0"
+                      : "pointer-events-none opacity-0 -translate-y-2"
                   }`}
                 >
                   <div className="glass-strong rounded-2xl p-6 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)]">
@@ -71,15 +99,22 @@ export function Navbar() {
                         <Link
                           key={s.to}
                           to={s.to}
+                          onClick={() => setOpen(false)}
                           className="group flex flex-col gap-1 rounded-xl border border-transparent p-4 transition-all hover:border-white/10 hover:bg-white/[0.03]"
                         >
                           <span className="text-sm font-medium text-white">{s.label}</span>
-                          <span className="text-xs leading-relaxed text-muted-foreground">{s.desc}</span>
+                          <span className="text-xs leading-relaxed text-muted-foreground">
+                            {s.desc}
+                          </span>
                         </Link>
                       ))}
                     </div>
                     <div className="hairline my-5" />
-                    <Link to="/services" className="text-electric inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.2em]">
+                    <Link
+                      to="/services"
+                      onClick={() => setOpen(false)}
+                      className="text-electric inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.2em]"
+                    >
                       All capabilities <span aria-hidden>→</span>
                     </Link>
                   </div>
@@ -89,16 +124,22 @@ export function Navbar() {
               <Link
                 key={item.to}
                 to={item.to}
-                className="link-underline text-[13px] font-medium tracking-wide text-white/80 hover:text-white"
-                activeProps={{ className: "link-underline text-[13px] font-medium tracking-wide text-white" }}
+                className="link-underline relative inline-flex items-center gap-2 text-[13px] font-medium tracking-wide text-white/80 hover:text-white transition-colors"
+                activeProps={{
+                  className:
+                    "link-underline relative inline-flex items-center gap-2 text-[13px] font-medium tracking-wide text-white transition-colors",
+                }}
               >
                 {item.label}
+                {path === item.to && (
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-electric" aria-hidden />
+                )}
               </Link>
             ),
           )}
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="hidden items-center gap-3 lg:flex">
           <Link to="/contact" className="btn-electric text-[12px]">
             Schedule a Conversation
           </Link>
@@ -116,18 +157,28 @@ export function Navbar() {
       {mobile && (
         <div className="lg:hidden glass-strong border-t border-white/5">
           <div className="container-elite flex flex-col gap-1 py-6">
-            {nav.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className="rounded-lg px-3 py-3 text-sm text-white/80 hover:bg-white/5 hover:text-white"
-              >
-                {item.label}
+            {nav.map((item) => {
+              const isActive =
+                path === item.to || (item.to === "/services" && path.startsWith("/services"));
+              return (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className={`rounded-lg px-3 py-3 text-sm transition-all ${
+                    isActive
+                      ? "border-l-2 border-electric bg-white/5 text-white"
+                      : "border-l-2 border-transparent text-white/80 hover:bg-white/5 hover:text-white"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+            <div className="flex items-center gap-3 py-3">
+              <Link to="/contact" className="btn-electric flex-1 justify-center text-[12px]">
+                Schedule a Conversation
               </Link>
-            ))}
-            <Link to="/contact" className="btn-electric mt-4 justify-center text-[12px]">
-              Schedule a Conversation
-            </Link>
+            </div>
           </div>
         </div>
       )}

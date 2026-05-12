@@ -22,7 +22,9 @@ export function ServiceTemplate({ eyebrow, title, lede, whoFor, whatWeDeliver, o
             <Link to="/contact" className="btn-electric">
               Discuss this engagement <ArrowUpRight className="h-4 w-4" />
             </Link>
-            <Link to="/services" className="btn-ghost">All capabilities</Link>
+            <Link to="/services" className="btn-ghost">
+              All capabilities
+            </Link>
           </div>
         </Reveal>
       </PageHero>
@@ -30,7 +32,9 @@ export function ServiceTemplate({ eyebrow, title, lede, whoFor, whatWeDeliver, o
       <section className="py-24">
         <div className="container-elite grid gap-16 md:grid-cols-12">
           <div className="md:col-span-4">
-            <Reveal><div className="eyebrow">Who It's For</div></Reveal>
+            <Reveal>
+              <div className="eyebrow">Who It's For</div>
+            </Reveal>
             <Reveal delay={100}>
               <h2 className="font-display mt-6 text-3xl font-light leading-tight tracking-tight text-gradient md:text-4xl">
                 Calibrated for senior leaders at consequential moments.
@@ -55,7 +59,9 @@ export function ServiceTemplate({ eyebrow, title, lede, whoFor, whatWeDeliver, o
       <section className="border-y border-white/5 bg-[oklch(0.06_0.012_250)] py-24">
         <div className="container-elite">
           <div className="max-w-3xl">
-            <Reveal><div className="eyebrow">What We Deliver</div></Reveal>
+            <Reveal>
+              <div className="eyebrow">What We Deliver</div>
+            </Reveal>
             <Reveal delay={100}>
               <h2 className="font-display mt-6 text-4xl font-light leading-[1.05] tracking-tight text-gradient md:text-5xl">
                 A senior-led engagement, end to end.
@@ -67,7 +73,9 @@ export function ServiceTemplate({ eyebrow, title, lede, whoFor, whatWeDeliver, o
               <Reveal key={d.t} delay={i * 80}>
                 <article className="card-elite h-full p-8">
                   <div className="font-display text-3xl font-light text-electric">0{i + 1}</div>
-                  <h3 className="font-display mt-4 text-xl font-light tracking-tight text-white">{d.t}</h3>
+                  <h3 className="font-display mt-4 text-xl font-light tracking-tight text-white">
+                    {d.t}
+                  </h3>
                   <p className="mt-3 text-[14px] leading-relaxed text-muted-foreground">{d.d}</p>
                 </article>
               </Reveal>
@@ -79,7 +87,9 @@ export function ServiceTemplate({ eyebrow, title, lede, whoFor, whatWeDeliver, o
       <section className="py-24">
         <div className="container-elite">
           <div className="max-w-3xl">
-            <Reveal><div className="eyebrow">Outcomes</div></Reveal>
+            <Reveal>
+              <div className="eyebrow">Outcomes</div>
+            </Reveal>
             <Reveal delay={100}>
               <h2 className="font-display mt-6 text-4xl font-light leading-[1.05] tracking-tight text-gradient md:text-5xl">
                 What clients walk away with.
