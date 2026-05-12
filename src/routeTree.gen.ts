@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TeamRouteImport } from './routes/team'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ApproachRouteImport } from './routes/approach'
 import { Route as AboutRouteImport } from './routes/about'
@@ -18,6 +19,11 @@ import { Route as ServicesLeadershipAssessmentRouteImport } from './routes/servi
 import { Route as ServicesLeadershipAdvisoryRouteImport } from './routes/services.leadership-advisory'
 import { Route as ServicesExecutiveSearchRouteImport } from './routes/services.executive-search'
 
+const TeamRoute = TeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/approach': typeof ApproachRoute
   '/services': typeof ServicesRouteWithChildren
+  '/team': typeof TeamRoute
   '/services/executive-search': typeof ServicesExecutiveSearchRoute
   '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
   '/services/leadership-assessment': typeof ServicesLeadershipAssessmentRoute
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/approach': typeof ApproachRoute
   '/services': typeof ServicesRouteWithChildren
+  '/team': typeof TeamRoute
   '/services/executive-search': typeof ServicesExecutiveSearchRoute
   '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
   '/services/leadership-assessment': typeof ServicesLeadershipAssessmentRoute
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/approach': typeof ApproachRoute
   '/services': typeof ServicesRouteWithChildren
+  '/team': typeof TeamRoute
   '/services/executive-search': typeof ServicesExecutiveSearchRoute
   '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
   '/services/leadership-assessment': typeof ServicesLeadershipAssessmentRoute
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/approach'
     | '/services'
+    | '/team'
     | '/services/executive-search'
     | '/services/leadership-advisory'
     | '/services/leadership-assessment'
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/approach'
     | '/services'
+    | '/team'
     | '/services/executive-search'
     | '/services/leadership-advisory'
     | '/services/leadership-assessment'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/approach'
     | '/services'
+    | '/team'
     | '/services/executive-search'
     | '/services/leadership-advisory'
     | '/services/leadership-assessment'
@@ -131,10 +143,18 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ApproachRoute: typeof ApproachRoute
   ServicesRoute: typeof ServicesRouteWithChildren
+  TeamRoute: typeof TeamRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/team': {
+      id: '/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
@@ -217,6 +237,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ApproachRoute: ApproachRoute,
   ServicesRoute: ServicesRouteWithChildren,
+  TeamRoute: TeamRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
