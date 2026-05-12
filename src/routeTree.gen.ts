@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TeamRouteImport } from './routes/team'
+import { Route as StoriesRouteImport } from './routes/stories'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ApproachRouteImport } from './routes/approach'
 import { Route as AboutRouteImport } from './routes/about'
@@ -22,6 +23,11 @@ import { Route as ServicesExecutiveSearchRouteImport } from './routes/services.e
 const TeamRoute = TeamRouteImport.update({
   id: '/team',
   path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoriesRoute = StoriesRouteImport.update({
+  id: '/stories',
+  path: '/stories',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesRoute = ServicesRouteImport.update({
@@ -73,6 +79,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/approach': typeof ApproachRoute
   '/services': typeof ServicesRouteWithChildren
+  '/stories': typeof StoriesRoute
   '/team': typeof TeamRoute
   '/services/executive-search': typeof ServicesExecutiveSearchRoute
   '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
@@ -84,6 +91,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/approach': typeof ApproachRoute
   '/services': typeof ServicesRouteWithChildren
+  '/stories': typeof StoriesRoute
   '/team': typeof TeamRoute
   '/services/executive-search': typeof ServicesExecutiveSearchRoute
   '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
@@ -96,6 +104,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/approach': typeof ApproachRoute
   '/services': typeof ServicesRouteWithChildren
+  '/stories': typeof StoriesRoute
   '/team': typeof TeamRoute
   '/services/executive-search': typeof ServicesExecutiveSearchRoute
   '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
@@ -109,6 +118,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/approach'
     | '/services'
+    | '/stories'
     | '/team'
     | '/services/executive-search'
     | '/services/leadership-advisory'
@@ -120,6 +130,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/approach'
     | '/services'
+    | '/stories'
     | '/team'
     | '/services/executive-search'
     | '/services/leadership-advisory'
@@ -131,6 +142,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/approach'
     | '/services'
+    | '/stories'
     | '/team'
     | '/services/executive-search'
     | '/services/leadership-advisory'
@@ -143,6 +155,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ApproachRoute: typeof ApproachRoute
   ServicesRoute: typeof ServicesRouteWithChildren
+  StoriesRoute: typeof StoriesRoute
   TeamRoute: typeof TeamRoute
 }
 
@@ -153,6 +166,13 @@ declare module '@tanstack/react-router' {
       path: '/team'
       fullPath: '/team'
       preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stories': {
+      id: '/stories'
+      path: '/stories'
+      fullPath: '/stories'
+      preLoaderRoute: typeof StoriesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services': {
@@ -237,6 +257,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ApproachRoute: ApproachRoute,
   ServicesRoute: ServicesRouteWithChildren,
+  StoriesRoute: StoriesRoute,
   TeamRoute: TeamRoute,
 }
 export const routeTree = rootRouteImport
