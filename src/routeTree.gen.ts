@@ -13,6 +13,7 @@ import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ApproachRouteImport } from './routes/approach'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesOrganizationalStrategyRouteImport } from './routes/services.organizational-strategy'
 import { Route as ServicesLeadershipAdvisoryRouteImport } from './routes/services.leadership-advisory'
 import { Route as ServicesExecutiveSearchRouteImport } from './routes/services.executive-search'
 
@@ -36,6 +37,12 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesOrganizationalStrategyRoute =
+  ServicesOrganizationalStrategyRouteImport.update({
+    id: '/organizational-strategy',
+    path: '/organizational-strategy',
+    getParentRoute: () => ServicesRoute,
+  } as any)
 const ServicesLeadershipAdvisoryRoute =
   ServicesLeadershipAdvisoryRouteImport.update({
     id: '/leadership-advisory',
@@ -55,6 +62,7 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRouteWithChildren
   '/services/executive-search': typeof ServicesExecutiveSearchRoute
   '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
+  '/services/organizational-strategy': typeof ServicesOrganizationalStrategyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -63,6 +71,7 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRouteWithChildren
   '/services/executive-search': typeof ServicesExecutiveSearchRoute
   '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
+  '/services/organizational-strategy': typeof ServicesOrganizationalStrategyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -72,6 +81,7 @@ export interface FileRoutesById {
   '/services': typeof ServicesRouteWithChildren
   '/services/executive-search': typeof ServicesExecutiveSearchRoute
   '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
+  '/services/organizational-strategy': typeof ServicesOrganizationalStrategyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -82,6 +92,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/services/executive-search'
     | '/services/leadership-advisory'
+    | '/services/organizational-strategy'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -90,6 +101,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/services/executive-search'
     | '/services/leadership-advisory'
+    | '/services/organizational-strategy'
   id:
     | '__root__'
     | '/'
@@ -98,6 +110,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/services/executive-search'
     | '/services/leadership-advisory'
+    | '/services/organizational-strategy'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -137,6 +150,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/organizational-strategy': {
+      id: '/services/organizational-strategy'
+      path: '/organizational-strategy'
+      fullPath: '/services/organizational-strategy'
+      preLoaderRoute: typeof ServicesOrganizationalStrategyRouteImport
+      parentRoute: typeof ServicesRoute
+    }
     '/services/leadership-advisory': {
       id: '/services/leadership-advisory'
       path: '/leadership-advisory'
@@ -157,11 +177,13 @@ declare module '@tanstack/react-router' {
 interface ServicesRouteChildren {
   ServicesExecutiveSearchRoute: typeof ServicesExecutiveSearchRoute
   ServicesLeadershipAdvisoryRoute: typeof ServicesLeadershipAdvisoryRoute
+  ServicesOrganizationalStrategyRoute: typeof ServicesOrganizationalStrategyRoute
 }
 
 const ServicesRouteChildren: ServicesRouteChildren = {
   ServicesExecutiveSearchRoute: ServicesExecutiveSearchRoute,
   ServicesLeadershipAdvisoryRoute: ServicesLeadershipAdvisoryRoute,
+  ServicesOrganizationalStrategyRoute: ServicesOrganizationalStrategyRoute,
 }
 
 const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
