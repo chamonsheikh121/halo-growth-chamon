@@ -13,6 +13,7 @@ import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ApproachRouteImport } from './routes/approach'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesLeadershipAdvisoryRouteImport } from './routes/services.leadership-advisory'
 
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
@@ -34,39 +35,64 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesLeadershipAdvisoryRoute =
+  ServicesLeadershipAdvisoryRouteImport.update({
+    id: '/leadership-advisory',
+    path: '/leadership-advisory',
+    getParentRoute: () => ServicesRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/approach': typeof ApproachRoute
-  '/services': typeof ServicesRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/approach': typeof ApproachRoute
-  '/services': typeof ServicesRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/approach': typeof ApproachRoute
-  '/services': typeof ServicesRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/approach' | '/services'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/approach'
+    | '/services'
+    | '/services/leadership-advisory'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/approach' | '/services'
-  id: '__root__' | '/' | '/about' | '/approach' | '/services'
+  to:
+    | '/'
+    | '/about'
+    | '/approach'
+    | '/services'
+    | '/services/leadership-advisory'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/approach'
+    | '/services'
+    | '/services/leadership-advisory'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ApproachRoute: typeof ApproachRoute
-  ServicesRoute: typeof ServicesRoute
+  ServicesRoute: typeof ServicesRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -99,15 +125,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/leadership-advisory': {
+      id: '/services/leadership-advisory'
+      path: '/leadership-advisory'
+      fullPath: '/services/leadership-advisory'
+      preLoaderRoute: typeof ServicesLeadershipAdvisoryRouteImport
+      parentRoute: typeof ServicesRoute
+    }
   }
 }
+
+interface ServicesRouteChildren {
+  ServicesLeadershipAdvisoryRoute: typeof ServicesLeadershipAdvisoryRoute
+}
+
+const ServicesRouteChildren: ServicesRouteChildren = {
+  ServicesLeadershipAdvisoryRoute: ServicesLeadershipAdvisoryRoute,
+}
+
+const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
+  ServicesRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ApproachRoute: ApproachRoute,
-  ServicesRoute: ServicesRoute,
+  ServicesRoute: ServicesRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
