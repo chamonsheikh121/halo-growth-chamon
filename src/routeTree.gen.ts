@@ -14,6 +14,7 @@ import { Route as ApproachRouteImport } from './routes/approach'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesLeadershipAdvisoryRouteImport } from './routes/services.leadership-advisory'
+import { Route as ServicesExecutiveSearchRouteImport } from './routes/services.executive-search'
 
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
@@ -41,12 +42,18 @@ const ServicesLeadershipAdvisoryRoute =
     path: '/leadership-advisory',
     getParentRoute: () => ServicesRoute,
   } as any)
+const ServicesExecutiveSearchRoute = ServicesExecutiveSearchRouteImport.update({
+  id: '/executive-search',
+  path: '/executive-search',
+  getParentRoute: () => ServicesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/approach': typeof ApproachRoute
   '/services': typeof ServicesRouteWithChildren
+  '/services/executive-search': typeof ServicesExecutiveSearchRoute
   '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
 }
 export interface FileRoutesByTo {
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/approach': typeof ApproachRoute
   '/services': typeof ServicesRouteWithChildren
+  '/services/executive-search': typeof ServicesExecutiveSearchRoute
   '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
 }
 export interface FileRoutesById {
@@ -62,6 +70,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/approach': typeof ApproachRoute
   '/services': typeof ServicesRouteWithChildren
+  '/services/executive-search': typeof ServicesExecutiveSearchRoute
   '/services/leadership-advisory': typeof ServicesLeadershipAdvisoryRoute
 }
 export interface FileRouteTypes {
@@ -71,6 +80,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/approach'
     | '/services'
+    | '/services/executive-search'
     | '/services/leadership-advisory'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -78,6 +88,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/approach'
     | '/services'
+    | '/services/executive-search'
     | '/services/leadership-advisory'
   id:
     | '__root__'
@@ -85,6 +96,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/approach'
     | '/services'
+    | '/services/executive-search'
     | '/services/leadership-advisory'
   fileRoutesById: FileRoutesById
 }
@@ -132,14 +144,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesLeadershipAdvisoryRouteImport
       parentRoute: typeof ServicesRoute
     }
+    '/services/executive-search': {
+      id: '/services/executive-search'
+      path: '/executive-search'
+      fullPath: '/services/executive-search'
+      preLoaderRoute: typeof ServicesExecutiveSearchRouteImport
+      parentRoute: typeof ServicesRoute
+    }
   }
 }
 
 interface ServicesRouteChildren {
+  ServicesExecutiveSearchRoute: typeof ServicesExecutiveSearchRoute
   ServicesLeadershipAdvisoryRoute: typeof ServicesLeadershipAdvisoryRoute
 }
 
 const ServicesRouteChildren: ServicesRouteChildren = {
+  ServicesExecutiveSearchRoute: ServicesExecutiveSearchRoute,
   ServicesLeadershipAdvisoryRoute: ServicesLeadershipAdvisoryRoute,
 }
 
